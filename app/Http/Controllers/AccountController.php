@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,5 +40,33 @@ session()->flash('success','You Have Register Successfully');
  }
    public function login(){
       return view('front.account.login');
+   }
+
+   public function authenticate(Request $request){
+$validator= Validator::make($request->all(),[
+   'email' => 'required|email',
+   'pass' => 'required'
+]);
+
+if($validator->passes()){
+
+   if(Auth::attempt(['email' => $request->email, 'password' => $request->pass])){
+      return redirect()->route('account.profile');
+   }else{
+return redirect()->route('account.login')->with('error','Either Email/password is incorrect');
+   }
+
+}else{
+   return redirect()->route('account.login')->withErrors($validator)->withInput($request->only('email'));
+}
+   }
+
+   public function profile(){
+      return view('front.account.profile');
+   }
+   
+   public function logout(){
+      Auth::logout();
+      return redirect()->route('account.login');
    }
 }
