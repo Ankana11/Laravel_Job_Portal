@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -106,5 +107,34 @@ session()->flash('success','Your profle updated successfully');
    public function logout(){
       Auth::logout();
       return redirect()->route('account.login');
+   }
+
+   public function updateprofilepic(Request $req){
+      $id = Auth::user()->id;
+      $validator = Validator::make($req->all(),[
+         'image' => 'required|image'
+         
+      ]);
+      if($validator->passes()){
+         $image= $req->file('image');
+         $ext= $image->getClientOriginalExtension();
+         $imagename= $id.'-'.time().'.'.$ext;
+         $image->move(public_path('profilepic/'), $imagename);
+
+         File::delete(public_path('profilepic/'.Auth::user()->image));
+
+         User::where('id',$id)->update(['image' => $imagename]);
+         session()->flash('success','Your profle picture updated successfully');
+         return response()->json([
+            'status'=>'true',
+            'errors' =>[]
+         ]);
+
+      }else{
+         return response()->json([
+            'status'=>'false',
+            'errors' =>$validator->errors()
+         ]);
+      }
    }
 }
