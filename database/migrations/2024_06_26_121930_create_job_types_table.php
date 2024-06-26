@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('job_type', function (Blueprint $table) {
+        Schema::create('job_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('status')->default(1);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_type');
+        Schema::dropIfExists('job_types');
     }
 };
