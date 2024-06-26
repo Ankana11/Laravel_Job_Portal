@@ -22,10 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'index'])->name('home');
 
 
-
-
-
-
 Route::group(['account'],function(){
     //Guest route
 
