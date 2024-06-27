@@ -74,7 +74,7 @@
 
                                 <div class="mb-4 col-md-6">
                                     <label for="" class="mb-2">Location<span class="req">*</span></label>
-                                    <input type="text" placeholder="location" id="location" name="Location" class="form-control">
+                                    <input type="text" placeholder="location" id="location" name="location" class="form-control">
                                     <p></p>
                                 </div>
                             </div>
@@ -130,13 +130,13 @@
 
                                 <div class="mb-4 col-md-6">
                                     <label for="" class="mb-2">Location</label>
-                                    <input type="text" placeholder="Location" id="location" name="location" class="form-control">
+                                    <input type="text" placeholder="Location" id="company_location" name="company_location" class="form-control">
                                 </div>
                             </div>
 
                             <div class="mb-4">
                                 <label for="" class="mb-2">Website</label>
-                                <input type="text" placeholder="Website" id="website" name="website" class="form-control">
+                                <input type="text" placeholder="Website" id="company_website" name="company_website" class="form-control">
                             </div>
                         </div> 
                         <div class="card-footer  p-4">
@@ -170,7 +170,7 @@
     $("#location").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('')
     $("#vacancy").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('')
     
-    // window.location.href='{{ route("account.myjob") }}';
+    window.location.href='{{ route("account.myjob") }}';
             
     }else{
         var errors = response.errors;

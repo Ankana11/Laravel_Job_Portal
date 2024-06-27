@@ -169,12 +169,13 @@ session()->flash('success','Your profle updated successfully');
          $job->title = $request->title;
          $job->category_id = $request->category;
          $job->job_type_id = $request->jobtype;
+         $job->user_id = Auth::user()->id;
          $job->vacancy = $request->vacancy;
          $job->location = $request->location;
          $job->description = $request->description;
          $job->benefits = $request->benefits;
-         $job->reponsibility = $request->reponsibility;
-         $job->qualification = $request->qualification;
+         $job->responsibility = $request->responsibility;
+         $job->qualifications = $request->qualifications;
          $job->experience = $request->experience;
          $job->company_name = $request->company_name;
          $job->company_location = $request->company_location;
@@ -196,6 +197,9 @@ session()->flash('success','Your profle updated successfully');
    }
 }
 public function myjob(){
-   return view('front.account.job.my-job');
+   $jobs = Job::where('user_id',Auth::user()->id)->with('jobType')->paginate(10);
+   return view('front.account.job.my-job',[
+      'jobs' => $jobs
+   ]);
 }
 }
