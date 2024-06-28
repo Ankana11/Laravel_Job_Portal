@@ -202,4 +202,92 @@ public function myjob(){
       'jobs' => $jobs
    ]);
 }
+
+public function editjob(Request $request,$id){
+   // dd($id);
+   $categories = Category::orderBy('name','ASC')->where('status',1)->get();
+     $jobtypes = JobType::orderBy('name','ASC')->where('status',1)->get();
+
+$job=Job::where([
+   'user_id' => Auth::user()->id,
+'id' =>$id
+])->first();
+
+if($job== null){
+   abort(404);
+}
+
+    return view('front.account.job.edit-job',[
+      'categories' => $categories,
+      'jobtypes' => $jobtypes,
+      'job' => $job
+    ]);
+}
+
+public function updatejob(Request $request, $id){
+   $rules = [
+      'title' => 'required',
+      'category' => 'required',
+      'jobtype' => 'required',
+      'vacancy' => 'required|integer',
+      'location' => 'required',
+      'description' => 'required',
+      'company_name' => 'required|max:50',
+   ];
+   $validator = Validator::make($request->all(),$rules);
+
+   if($validator->passes()){
+     
+      $job = Job::find($id);
+      $job->title = $request->title;
+      $job->category_id = $request->category;
+      $job->job_type_id = $request->jobtype;
+      $job->user_id = Auth::user()->id;
+      $job->vacancy = $request->vacancy;
+      $job->location = $request->location;
+      $job->description = $request->description;
+      $job->benefits = $request->benefits;
+      $job->responsibility = $request->responsibility;
+      $job->qualifications = $request->qualifications;
+      $job->experience = $request->experience;
+      $job->company_name = $request->company_name;
+      $job->company_location = $request->company_location;
+      $job->company_website = $request->company_website;
+      $job->save();
+     
+ session()->flash('status','Job updated successfully');
+
+ return response()->json([
+   'status' => true,
+   'errors' => []
+]);
+
+}else{
+   return response()->json([
+      'status' => false,
+      'errors' => $validator->errors()
+   ]);
+}
+}
+
+public function deletejob(Request $request){
+$job = Job::where([
+   'user_id' => Auth::user()->id,
+   'id' => $request->jobId
+])->first();
+
+if($job == null){
+   session()->flash('error','Either job deleted or not found');
+   return response()->json([
+      'status' => true
+   ]);
+}
+
+Job::where('id', $request->jobId)->delete();
+session()->flash('success','Job deleted successfully');
+return response()->json([
+   'status' => true
+]);
+}
+
 }
