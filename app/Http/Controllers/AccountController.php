@@ -197,7 +197,7 @@ session()->flash('success','Your profle updated successfully');
    }
 }
 public function myjob(){
-   $jobs = Job::where('user_id',Auth::user()->id)->with('jobType')->paginate(10);
+   $jobs = Job::where('user_id',Auth::user()->id)->with('jobType')->orderBy('created_at','DESC')->paginate(10);
    return view('front.account.job.my-job',[
       'jobs' => $jobs
    ]);
@@ -289,5 +289,7 @@ return response()->json([
    'status' => true
 ]);
 }
+
+
 
 }
