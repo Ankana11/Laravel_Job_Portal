@@ -107,22 +107,16 @@
                 @endif
                
             </div>
-
-            <div class="d-grid mt-3">
-                <a href="{{ route('jobDetail',$job->id) }}" class="btn btn-primary btn-lg">Details</a>
+                        <div class="d-grid mt-3">
+                            <a href="{{ route('jobDetail',$job->id) }}" class="btn btn-primary btn-lg">Details</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-@endforeach
-
-                         @else 
+            @endforeach
+              @else 
                          <div class="col-md-12">Jobs Not Found</div>  
-                        @endif
-                      
-                        
-                        
-                                                 
+                        @endif                           
                     </div>
                     </div>
                 </div>
