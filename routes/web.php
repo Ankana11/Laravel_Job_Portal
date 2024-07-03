@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/jobs',[JobsController::class,'index'])->name('jobs');
 Route::get('/jobs/detail/{id}',[JobsController::class,'detail'])->name('jobDetail');
+Route::post('/apply-job',[JobsController::class,'applyJob'])->name('applyJob');
 
 
 Route::group(['account'],function(){
@@ -48,7 +49,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('account/edit-job/{jobId}',[AccountController::class,'editjob'])->name('account.editjob');
     Route::post('account/update-job/{jobId}',[AccountController::class,'updatejob'])->name('account.updatejob');
     Route::post('account/delete-job',[AccountController::class,'deletejob'])->name('account.deletejob');
-
+    Route::get('account/my-job-applications',[AccountController::class,'myJobApplications'])->name('account.myJobApplications');
+    Route::post('account/remove-job',[AccountController::class,'removeJobs'])->name('account.removeJobs');
 });
 
 });
