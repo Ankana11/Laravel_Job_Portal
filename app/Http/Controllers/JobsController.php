@@ -77,21 +77,21 @@ if ($job == null) {
 abort(404);
 }
 
-// $count = 0;
-// if (Auth::user()) {
-// $count = SavedJ::where([
-// 'user_id' => Auth::user()->id,
-// 'job_id' => $id
-// ])->count();
-// }
+$count = 0;
+if (Auth::user()) {
+$count = SavedJob::where([
+'user_id' => Auth::user()->id,
+'job_id' => $id
+])->count();
+}
 
 
 // fetch applicants
 
-// $applications = JobApplication::where('job_id',$id)->with('user')->get();
+$applications = JobApplication::where('job_id',$id)->with('user')->get();
 
 
-return view('front.jobDetail',['job' => $job]);
+return view('front.jobDetail',['job' => $job, 'applications' => $applications, 'count' => $count]);
 }
 
 
