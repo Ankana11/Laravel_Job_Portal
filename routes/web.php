@@ -24,6 +24,8 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/jobs',[JobsController::class,'index'])->name('jobs');
 Route::get('/jobs/detail/{id}',[JobsController::class,'detail'])->name('jobDetail');
 Route::post('/apply-job',[JobsController::class,'applyJob'])->name('applyJob');
+Route::post('/save-job',[JobsController::class,'saveJob'])->name('saveJob');
+
 
 
 Route::group(['account'],function(){
@@ -34,6 +36,7 @@ Route::group(['middleware' => 'guest'], function(){
     Route::post('account/proccess-register',[AccountController::class,'proccessRegistration'])->name('account.proccessRegistration');
     Route::get('account/login',[AccountController::class,'login'])->name('account.login');
     Route::post('account/authenticate',[AccountController::class,'authenticate'])->name('account.authenticate');
+    
 });
 
 //Authenticate route
@@ -51,6 +54,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('account/delete-job',[AccountController::class,'deletejob'])->name('account.deletejob');
     Route::get('account/my-job-applications',[AccountController::class,'myJobApplications'])->name('account.myJobApplications');
     Route::post('account/remove-job',[AccountController::class,'removeJobs'])->name('account.removeJobs');
+    Route::get('account/saved-job',[AccountController::class,'savedJobs'])->name('account.savedJobs');
+    Route::post('account/remove-saved-job',[AccountController::class,'removeSavedJob'])->name('account.removeSavedJob');
 });
 
 });
