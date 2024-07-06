@@ -33,9 +33,9 @@ Route::post('/save-job',[JobsController::class,'saveJob'])->name('saveJob');
 Route::group(['prefix' => 'admin','middleware' => 'checkRole'], function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
     Route::get('/users',[UserController::class,'index'])->name('admin.users');
-    // Route::get('/users',[UserController::class,'index'])->name('admin.users');
-    // Route::get('/users/{id}',[UserController::class,'edit'])->name('admin.users.edit');
-    // Route::put('/users/{id}',[UserController::class,'update'])->name('admin.users.update');
+    Route::get('/users/{id}',[UserController::class,'edit'])->name('admin.users.edit');
+    Route::get('/users/{id}',[UserController::class,'edit'])->name('admin.users.edit');
+    Route::put('/users/{id}',[UserController::class,'update'])->name('admin.users.update');
     // Route::delete('/users',[UserController::class,'destroy'])->name('admin.users.destroy');
     // Route::get('/jobs',[JobController::class,'index'])->name('admin.jobs');
     // Route::get('/jobs/edit/{id}',[JobController::class,'edit'])->name('admin.jobs.edit');
