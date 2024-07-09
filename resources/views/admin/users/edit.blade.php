@@ -26,12 +26,12 @@
                             <div class="card-body  p-4">
                                 <h3 class="fs-4 mb-1">User / Edit</h3>
                                 <div class="mb-4">
-                                    <label for="" class="mb-2">Name*</label>
+                                    <label for="" class="mb-2">Name</label>
                                     <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control" value="{{ $user->name }}">
                                     <p></p>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="" class="mb-2">Email*</label>
+                                    <label for="" class="mb-2">Email</label>
                                     <input type="text" name="email" id="email"  placeholder="Enter Email" class="form-control" value="{{ $user->email }}">
                                     <p></p>
                                 </div>
