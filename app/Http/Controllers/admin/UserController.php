@@ -27,7 +27,7 @@ return view('admin.users.list',[
     public function update($id, Request $request) {
         
         $validator = Validator::make($request->all(),[
-            'name' => 'required|min:5|max:20',
+            'name' => 'required|',
             'email' => 'required|email|unique:users,email,'.$id.',id'
         ]);
 
@@ -56,6 +56,23 @@ return view('admin.users.list',[
         }
     }
 
+    public function destroy(Request $request){
+        $id = $request->id;
 
+        $user = User::find($id);
+
+        if ($user == null) {
+            session()->flash('error','User not found');
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+
+        $user->delete();
+        session()->flash('success','User deleted successfully');
+        return response()->json([
+            'status' => true,
+        ]);
+    }
 
 }
