@@ -18,7 +18,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-5">
                 <div class="card shadow border-0 p-5">
-                    <h1 class="h3">Login</h1>
+                    <h1 class="h3">Change Password</h1>
                     <form action="{{ route('account.authenticate') }}" method="post">
                         @csrf
                         <div class="mb-3">
@@ -28,23 +28,15 @@
                             <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
                         </div> 
-                        <div class="mb-3">
-                            <label for="" class="mb-2">Password*</label>
-                            <input type="password" name="pass" id="pass" class="form-control @error('pass') is-invalid @enderror" placeholder="Enter Password">
-
-                            @error('pass')
-                            <p class="invalid-feedback">{{ $message }}</p>
-                        @enderror
-
-                        </div> 
+                       
                         <div class="justify-content-between d-flex">
-                        <button class="btn btn-primary mt-2">Login</button>
-                            <a href="{{ route('account.forgotPassword') }}" class="mt-3">Forgot Password?</a>
+                        <button class="btn btn-primary mt-2">Submit</button>
+                         
                         </div>
                     </form>                    
                 </div>
                 <div class="mt-4 text-center">
-                    <p>Do not have an account? <a  href="{{ route('account.registration') }}">Register</a></p>
+                    <p>Do not have an account?   <a href="{{ route('account.login') }}" class="mt-3">Back to Login</a></p>
                 </div>
             </div>
         </div>
