@@ -7,7 +7,7 @@
             <div class="col-12 col-xl-8">
                 <h1>Find your dream job</h1>
                 <p>Thounsands of jobs available.</p>
-                <div class="banner-btn mt-5"><a href="#" class="btn btn-primary mb-4 mb-sm-0">Explore Now</a></div>
+                <div class="banner-btn mt-5"><a href="{{ route('jobs') }}" class="btn btn-primary mb-4 mb-sm-0">Explore Now</a></div>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
                     <a href="{{ route('jobs').'?category='.$category->id }}"><h4 class="pb-2">{{ $category->name }}</h4></a>
-                    <p class="mb-0"> <span>0</span> Available position</p>
+                    {{-- <p class="mb-0"> <span>0</span> Available position</p> --}}
                 </div>
             </div> 
             @endforeach                
@@ -113,43 +113,6 @@
         </div>
     </div>
 </section>
-<section class="section-3 bg-2 py-5">
-    <div class="container">
-        <h2>Latest Jobs</h2>
-        <div class="row pt-5">
-            @if ($latestjobs->isNotEmpty())
-                @foreach ($latestjobs as $latestjob)
-                    <div class="col-md-4">
-                        <div class="card border-0 p-3 shadow mb-4">
-                            <div class="card-body">
-                                <h3 class="border-0 fs-5 pb-2 mb-0">{{ $latestjob->title }}</h3>
-                                <p>{{ Str::words($latestjob->description, 5) }}</p>
-                                <div class="bg-light p-3 border">
-                                    <p class="mb-0">
-                                        <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>
-                                        <span class="ps-1">{{ $latestjob->location }}</span>
-                                    </p>
-                                    <p class="mb-0">
-                                        <span class="fw-bolder"><i class="fa fa-clock-o"></i></span>
-                                        <span class="ps-1">{{ $latestjob->jobType->name }}</span>
-                                    </p>
-                                    @if (!is_null($latestjob->salary))
-                                        <p class="mb-0">
-                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                            <span class="ps-1">{{ $latestjob->salary }}</span>
-                                        </p>
-                                    @endif
-                                </div>
-                                <div class="d-grid mt-3">
-                                    <a href="{{ route('jobDetail',$job->id) }}" class="btn btn-primary btn-lg">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-    </div>
-</section>
+
 
 @endsection
